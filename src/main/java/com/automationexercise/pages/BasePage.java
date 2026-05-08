@@ -8,9 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 public class BasePage {
     public static WebDriver driver;
 
+
     public void setDriver(WebDriver driver) {
         BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
 }

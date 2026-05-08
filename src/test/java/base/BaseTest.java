@@ -18,7 +18,6 @@ public class BaseTest {
         // Maximize window and set a default wait time so scripts don't fail if the site is slow
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         // Navigate to the target website
         driver.get("https://automationexercise.com/");
     }
