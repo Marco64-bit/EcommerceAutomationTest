@@ -19,18 +19,18 @@ public class ContactUsPage extends BasePage {
     }
 
     public void submitContactForm(String name, String email, String subject, String message) {
-        driver.findElement(contactUsButton).click();
-        driver.findElement(nameInput).sendKeys(name);
-        driver.findElement(emailInput).sendKeys(email);
-        driver.findElement(subjectInput).sendKeys(subject);
-        driver.findElement(messageInput).sendKeys(message);
-        driver.findElement(submitButton).click();
+        getElement(contactUsButton).click();
+        getElement(nameInput).sendKeys(name);
+        getElement(emailInput).sendKeys(email);
+        getElement(subjectInput).sendKeys(subject);
+        getElement(messageInput).sendKeys(message);
+        getElement(submitButton).click();
 
         Alert alert = driver.switchTo().alert();
         alert.accept();
     }
 
     public boolean isSuccessMessageVisible() {
-        return driver.findElement(successMessage).isDisplayed();
+        return getElement(successMessage).isDisplayed();
     }
 }

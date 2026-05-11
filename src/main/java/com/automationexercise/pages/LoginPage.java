@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
     private By logoutNavButton = By.cssSelector("a[href='/logout']");
 
     // Locators for Login Form
+    By loginHeader = By.xpath("//h2[text()='Login to your account']");
     private By loginEmailInput = By.cssSelector("input[data-qa='login-email']");
     private By loginPasswordInput = By.cssSelector("input[data-qa='login-password']");
     private By loginSubmitButton = By.cssSelector("button[data-qa='login-button']");
@@ -23,6 +24,10 @@ public class LoginPage extends BasePage {
     private By signupEmailInput = By.cssSelector("input[data-qa='signup-email']");
     private By signupSubmitButton = By.cssSelector("button[data-qa='signup-button']");
     private By existingEmailErrorMsg = By.xpath("//p[contains(text(), 'Email Address already exist!')]");
+    private By loggedInAsText = By.xpath("//*[contains(text(), 'Logged in as')]");
+
+    By deleteAccountBtn = By.xpath("//a[contains(text(),'Delete Account')]");
+    By accountDeletedMsg = By.cssSelector("[data-qa='account-deleted']");
 
     public LoginPage(WebDriver driver) {
         setDriver(driver);
@@ -30,25 +35,25 @@ public class LoginPage extends BasePage {
 
     // --- Navigation Actions ---
     public void navigateToLoginPage() {
-        driver.findElement(signupLoginNavButton).click();
+        getElement(signupLoginNavButton).click();
     }
 
     public void clickLogout() {
-        driver.findElement(logoutNavButton).click();
+        getElement(logoutNavButton).click();
     }
 
     // --- Login Actions ---
     public void performLogin(String email, String password) {
-        driver.findElement(loginEmailInput).sendKeys(email);
-        driver.findElement(loginPasswordInput).sendKeys(password);
-        driver.findElement(loginSubmitButton).click();
+        getElement(loginEmailInput).sendKeys(email);
+        getElement(loginPasswordInput).sendKeys(password);
+        getElement(loginSubmitButton).click();
     }
 
     // --- Signup Actions ---
     public void attemptSignup(String name, String email) {
-        driver.findElement(signupNameInput).sendKeys(name);
-        driver.findElement(signupEmailInput).sendKeys(email);
-        driver.findElement(signupSubmitButton).click();
+        getElement(signupNameInput).sendKeys(name);
+        getElement(signupEmailInput).sendKeys(email);
+        getElement(signupSubmitButton).click();
     }
 
     // --- Verification Actions ---
@@ -60,5 +65,24 @@ public class LoginPage extends BasePage {
 
     public boolean isLoginUrl() {
         return driver.getCurrentUrl().contains("/login");
+    }
+
+    public boolean isLoginHeaderDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(loginHeader)).isDisplayed();
+    }
+
+    public String getLoggedInUserText() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(loggedInAsText)).getText();
+    }
+
+    public void clickDeleteAccount() {
+        driver.findElement(deleteAccountBtn).click();
+    }
+
+    public String getDeleteConfirmation() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(accountDeletedMsg)).getText();
     }
 }

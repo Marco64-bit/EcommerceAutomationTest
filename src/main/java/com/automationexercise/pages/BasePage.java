@@ -13,4 +13,16 @@ public class BasePage {
         BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
+    public WebElement getElement(By locator) {
+        return driver.findElement(locator);
+    }
+
+    public void clickElement(By locator) {
+        getElement(locator).click();
+    }
+
+    public boolean isElementPresent(By locator) {
+        return getElement(locator).isDisplayed();
+    }
 }
