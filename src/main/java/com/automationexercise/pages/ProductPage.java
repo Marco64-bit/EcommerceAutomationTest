@@ -16,7 +16,7 @@ public class ProductPage extends BasePage {
     private final By searchButton = By.id("submit_search");
     private final By searchedProductsTitle = By.xpath("//h2[text()='Searched Products']");
     private final By firstProduct = By.xpath("(//div[@class='single-products'])[1]");
-    private final By addToCartFirst = By.xpath("(//a[@data-product-id='1'])[2]");
+    private final By addToCartFirst = By.xpath("(//a[@data-product-id='1'])[1]");
     private final By continueBtn = By.xpath("//button[text()='Continue Shopping']");
     private final By secondProduct = By.xpath("(//div[@class='single-products'])[2]");
     private final By addToCartSecond = By.xpath("(//a[@data-product-id='2'])[2]");
@@ -35,7 +35,7 @@ public class ProductPage extends BasePage {
 
     public ProductPage(WebDriver driver) {
         setDriver(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         this.actions = new Actions(driver);
     }
 

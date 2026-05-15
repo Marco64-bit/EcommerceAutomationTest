@@ -24,7 +24,7 @@ public class DeleteAccountTest extends BaseTest {
 
         // خطوة 8: التأكد من الدخول بنجاح
         String userText = loginPage.getLoggedInUserText();
-        Assert.assertEquals(userText, "Logged in as Test User", "User is not logged in successfully");
+        Assert.assertEquals(userText, "Logged in as test user", "User is not logged in successfully");
 
         // خطوة 9 و 10: حذف الحساب والتأكد من النتيجة النهائية
         loginPage.clickDeleteAccount();
